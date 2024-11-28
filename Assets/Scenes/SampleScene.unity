@@ -361,7 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f2dc7dd3771cc43beca9d148178ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputReader: {fileID: 11400000, guid: 66eb4f2e750506948a763949f999ce4d, type: 2}
 --- !u!4 &897750684
 Transform:
   m_ObjectHideFlags: 0
@@ -463,7 +462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.021500552, y: 0.05936551, z: -0.0012789442, w: 0.99800396}
+  m_LocalRotation: {x: 0.020862233, y: -0.0000000015296487, z: 3.1918836e-11, w: 0.9997824}
   m_LocalPosition: {x: 0, y: 1.7727174, z: -6.0318823}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -494,7 +493,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 2
+    Time: 0.5
     CustomCurve:
       serializedVersion: 2
       m_Curve: []
