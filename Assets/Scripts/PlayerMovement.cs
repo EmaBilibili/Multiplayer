@@ -25,21 +25,7 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
 
-        float x = previousMovementInput.x;
-        float z = previousMovementInput.z;
-        Vector3 direction = new Vector3(x, 0f, z).normalized;
-
-        if (direction.magnitude >= .1f)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCamera.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(_mTransform.eulerAngles.y, targetAngle, ref rotationSmoothVelocity,
-                rotationSmoothTime);
-            _mTransform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
-
-        }
+        Movement();
     }
 
     public override void OnNetworkSpawn()
@@ -67,5 +53,28 @@ public class PlayerMovement : NetworkBehaviour
     private void HandleMovement(Vector3 movementInput)
     {
         previousMovementInput = movementInput;
+    }
+
+    private void Movement()
+    {
+        float x = previousMovementInput.x;
+        float z = previousMovementInput.z;
+        Vector3 direction = new Vector3(x, 0f, z).normalized;
+
+        if (direction.magnitude >= .1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCamera.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(_mTransform.eulerAngles.y, targetAngle, ref rotationSmoothVelocity,
+                rotationSmoothTime);
+
+            if (AimController.instance.isAimingStatus == false)
+            {
+                _mTransform.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
+            
+            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            _characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
+
+        }
     }
 }
