@@ -73,7 +73,7 @@ public class AimController : NetworkBehaviour
         }
     }
 
-    private Vector3 AimToRayPoint()
+    public Vector3 AimToRayPoint()
     {
         Vector3 mouseWorldPosition = Vector3.zero;
 
