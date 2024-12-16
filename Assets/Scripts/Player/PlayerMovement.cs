@@ -6,7 +6,9 @@ public class PlayerMovement : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private InputReader _inputReader;
-    [SerializeField] private CharacterController _characterController;
+    // [SerializeField] private CharacterController _characterController;
+    [SerializeField] private Rigidbody rigidbody;
+
     private Transform _mTransform;
     private Transform mainCamera;
 
@@ -66,10 +68,16 @@ public class PlayerMovement : NetworkBehaviour
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(_mTransform.eulerAngles.y, targetAngle, ref rotationSmoothVelocity,
                 rotationSmoothTime);
-            _mTransform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            if (AimController.Instance.isAimingStatus==false)
+            {
+                _mTransform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            }
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
+            // _characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
+            rigidbody.position += moveDirection * (movementSpeed * Time.deltaTime);
 
         }
     }
