@@ -20,7 +20,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private Vector3 previousMovementInput;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!IsOwner)
         {
