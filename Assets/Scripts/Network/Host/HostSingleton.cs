@@ -31,10 +31,8 @@ public class HostSingleton : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public async Task CreateHost()
+    public void CreateHost()
     {
        _gameManager = new HostGameManager();
-
-       await _gameManager.InitAsync();
     }
 }

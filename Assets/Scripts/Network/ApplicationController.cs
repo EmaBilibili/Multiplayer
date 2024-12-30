@@ -5,6 +5,7 @@ using UnityEngine;
 public class ApplicationController : MonoBehaviour
 {
     [SerializeField] private ClientSingleton _clientSingletonPrefab;
+    [SerializeField] private HostSingleton _hostSingletonPrefab;
     private async void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -22,7 +23,16 @@ public class ApplicationController : MonoBehaviour
         {
             ClientSingleton clientSingleton = Instantiate(_clientSingletonPrefab);
 
-            await clientSingleton.CreateClient();
+            bool isAuthenticated = await clientSingleton.CreateClient();
+            
+            HostSingleton hostSingleton = Instantiate(_hostSingletonPrefab);
+
+            hostSingleton.CreateHost();
+
+            if (isAuthenticated)
+            {
+               clientSingleton.GameManager.GoToMainMenu();
+            }
         }
     }
 }
